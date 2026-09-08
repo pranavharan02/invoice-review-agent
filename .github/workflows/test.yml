@@ -1,0 +1,16 @@
+name: Invoice review tests
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Runtime version
+        run: node --version
+      - name: Policy regression suite
+        run: node --test review.test.mjs
